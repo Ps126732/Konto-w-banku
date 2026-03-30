@@ -2,7 +2,7 @@
 
 namespace Bank
 {
-    public class Konto
+    public class Konto: IKonto
     {
         private string klient;
         private decimal bilans;
