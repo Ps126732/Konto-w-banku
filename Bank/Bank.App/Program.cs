@@ -21,6 +21,16 @@ namespace Bank.App
             kontoLimit.Wplata(400m);
             Console.WriteLine($"[KontoLimit] {kontoLimit.Nazwa} | Bilans: {kontoLimit.Bilans} | Zablokowane: {kontoLimit.Zablokowane}");
 
+            IKonto klient = new Konto("Jan Kowalski", 100m);
+            Console.WriteLine($"Krok 1: Zwykłe konto. Bilans: {klient.Bilans} PLN");
+
+            klient = new DekoratorKontoPlus(klient, 500m);
+            Console.WriteLine($"Krok 2: Dodano limit. Nowy bilans do dyspozycji: {klient.Bilans} PLN");
+
+            klient = ((DekoratorKontoPlus)klient).ZrezygnujZLimitu();
+            Console.WriteLine($"Krok 3: Rezygnacja z limitu. Bilans wraca do normy: {klient.Bilans} PLN");
+
+
             Console.ReadKey();
         }
     }
